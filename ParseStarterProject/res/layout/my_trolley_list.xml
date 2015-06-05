@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="85dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnBackground"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/special_button_green"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="NameProd"
+        android:id="@+id/prodName"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/btnBackground"
+        android:layout_alignStart="@+id/btnBackground"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="#ff000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="$Price"
+        android:id="@+id/priceTrolley"
+        android:textColor="#ff000000"
+        android:layout_alignBottom="@+id/btnBackground"
+        android:layout_alignLeft="@+id/prodName"
+        android:layout_alignStart="@+id/prodName" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/remove"
+        android:layout_marginRight="22dp"
+        android:layout_marginEnd="22dp"
+        android:background="@drawable/error"
+        android:layout_alignTop="@+id/prodName"
+        android:layout_alignRight="@+id/btnBackground"
+        android:layout_alignEnd="@+id/btnBackground" />
+
+</RelativeLayout>

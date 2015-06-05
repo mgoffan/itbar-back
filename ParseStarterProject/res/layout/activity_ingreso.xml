@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/back"
+    android:background="@drawable/fondo_ppal_itbar">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/usuariotxt"
+            android:typeface="normal"
+            android:maxLength="5"
+            android:hint="Legajo"
+            android:layout_below="@+id/imagen"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/contratxt"
+            android:typeface="sans"
+            android:layout_below="@+id/usuariotxt"
+            android:layout_alignLeft="@+id/usuariotxt"
+            android:layout_alignStart="@+id/usuariotxt"
+            android:hint="Password" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Ingresar"
+            android:id="@+id/enterbtn"
+            android:layout_below="@+id/contratxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Registrar"
+            android:id="@+id/registerbtn"
+            android:layout_below="@+id/enterbtn"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/imagen"
+            android:background="@drawable/id"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

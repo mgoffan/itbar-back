@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.itbar.frontend.activities.TrolleyActivity"
+    android:background="@drawable/dark_greenwallpaper">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/darkgreen_button"
+        android:id="@+id/relativeLayout">
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/mainbtn"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/home" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/pricebtn"
+            android:background="@drawable/price"
+            android:layout_alignTop="@+id/mainbtn"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/sendbtn"
+            android:background="@drawable/check"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/mainbtn"
+            android:layout_toEndOf="@+id/mainbtn"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="$$$"
+            android:id="@+id/total"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/pricebtn"
+            android:layout_toEndOf="@+id/pricebtn"
+            android:textColor="#ff292929" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/payment"
+            android:background="@drawable/money"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="350dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView4"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/relativeLayout"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/container"></LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
