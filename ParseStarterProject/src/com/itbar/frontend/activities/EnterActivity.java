@@ -48,17 +48,12 @@ public class EnterActivity extends Activity {
 		w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
-		/*View decorView = getWindow().getDecorView();
-		int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
-		decorView.setSystemUiVisibility(uiOptions);*/
-
 		setContentView(R.layout.activity_ingreso);
 
 		final EditText usuario = (EditText) findViewById(R.id.usuariotxt);
 		final EditText contra = (EditText) findViewById(R.id.contratxt);
 
 		Button ingresar = (Button) findViewById(R.id.enterbtn);
-		Button register = (Button) findViewById(R.id.registerbtn);
 
 		RelativeLayout back = (RelativeLayout) findViewById(R.id.back);
 
@@ -66,8 +61,6 @@ public class EnterActivity extends Activity {
 
 		back.setBackgroundResource(R.drawable.fondo_ppal_itbar);
 
-		usuario.setText("54775");
-		contra.setText("kicr1995");
 
 		ingresar.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -75,7 +68,7 @@ public class EnterActivity extends Activity {
 
 				Form loginForm = FormBuilder.buildLoginForm();
 
-				loginForm.set(FieldKeys.KEY_LEGAJO, usuario.getText().toString());
+				loginForm.set(FieldKeys.KEY_CUIT, usuario.getText().toString());
 				loginForm.set(FieldKeys.KEY_PASSWORD, contra.getText().toString());
 
 
@@ -107,12 +100,6 @@ public class EnterActivity extends Activity {
 			}
 		});
 
-		register.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-			}
-		});
 	}
 
 
@@ -137,11 +124,6 @@ public class EnterActivity extends Activity {
 			// automatically handle clicks on the Home/Up button, so long
 			// as you specify a parent activity in AndroidManifest.xml.
 			int id = item.getItemId();
-
-			//noinspection SimplifiableIfStatement
-			if (id == R.id.action_settings) {
-				return true;
-			}
 
 			return super.onOptionsItemSelected(item);
 		}

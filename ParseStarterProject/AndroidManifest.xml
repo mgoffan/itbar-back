@@ -47,15 +47,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".frontend.activities.MainActivity"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".frontend.activities.RegisterActivity"
-            android:label="@string/title_activity_register" >
-        </activity>
-        <activity
             android:name=".frontend.ProductDescription"
             android:label="@string/title_activity_product_description"
             android:screenOrientation="portrait" >
@@ -69,35 +60,24 @@
             android:label="@string/title_activity_kiosco_menu" >
         </activity>
         <activity
-            android:name=".frontend.activities.ProductDescriptionActivity"
-            android:label="@string/title_activity_product_description" >
-        </activity>
-        <activity
             android:name=".frontend.activities.EnterActivity$listOfProducts"
             android:label="@string/title_activity_list_of_products" >
         </activity>
         <activity
-            android:name=".frontend.activities.ListOfProductsActivity"
-            android:label="@string/title_activity_list_of_products" >
+            android:name=".frontend.activities.MainActivity"
+            android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".frontend.activities.TrolleyActivity"
-            android:label="@string/title_activity_trolley" >
+            android:name=".frontend.activities.CategoryActivity"
+            android:label="@string/title_activity_category" >
         </activity>
-
-        <receiver android:name=".frontend.activities.itbarWidget" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/itbar_widget_info" />
-        </receiver>
-
         <activity
-            android:name=".frontend.activities.SuggestActivity"
-            android:label="@string/title_activity_suggest" >
+            android:name=".frontend.activities.ProductActivity"
+            android:label="@string/title_activity_product" >
+        </activity>
+        <activity
+            android:name=".frontend.activities.OrderActivity"
+            android:label="@string/title_activity_order" >
         </activity>
     </application>
 

@@ -1,39 +1,24 @@
 package com.itbar.frontend.activities;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.itbar.R;
 
-public class SuggestActivity extends Activity {
+public class OrderActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suggest);
-
-        EditText emailSubject = (EditText) findViewById(R.id.text);
-        Button boton = (Button) findViewById(R.id.sendsuggestion);
-
-        /*
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","kcortes.95@gmail.com",null));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-        startActivity(Intent.createChooser(emailIntent, "Send email..."));
-        */
-
-
+        setContentView(R.layout.activity_order);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_suggest, menu);
+        getMenuInflater().inflate(R.menu.menu_order, menu);
         return true;
     }
 

@@ -24,4 +24,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="title_activity_suggest">Suggest</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_order">OrderActivity</string>
 </resources>
