@@ -21,13 +21,11 @@ public class ServiceRepository {
 	private BarService barService;
 	private MenuServices menuServices;
 	private OrderService orderService;
-	private UserService userService;
 
 	public ServiceRepository() {
 		barService = new BarService();
 		menuServices = new MenuServices();
 		orderService = new OrderService();
-		userService = new UserService();
 	}
 
 	public static ServiceRepository getInstance() {
@@ -60,13 +58,5 @@ public class ServiceRepository {
 
 //    public void setOrderService(OrderService orderService) {
 //        this.orderService = orderService;
-//    }
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-//    public void setUserService(UserService userService) {
-//        this.userService = userService;
 //    }
 }

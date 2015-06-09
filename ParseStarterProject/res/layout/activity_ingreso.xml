@@ -17,7 +17,7 @@
             android:id="@+id/usuariotxt"
             android:typeface="normal"
             android:maxLength="5"
-            android:hint="Legajo"
+            android:hint="CUIT"
             android:layout_below="@+id/imagen"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

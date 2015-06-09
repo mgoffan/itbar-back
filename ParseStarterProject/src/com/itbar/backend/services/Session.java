@@ -19,30 +19,17 @@ public class Session {
 
 	private static Session instance = null;
 
-	private User currentUser = null;
-
 	private Bar currentBar = null;
-
-	private Order currentOrder = null;
 
 	private Session() {
 
 	}
-
 
 	public static Session use() {
 		if (instance == null) {
 			instance = new Session();
 		}
 		return instance;
-	}
-
-	public User getCurrentUser() {
-		return currentUser;
-	}
-
-	protected void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
 	}
 
 	public Bar getCurrentBar() {
@@ -53,11 +40,4 @@ public class Session {
 		this.currentBar = currentBar;
 	}
 
-	public Order getCurrentOrder() {
-		return currentOrder;
-	}
-
-	protected void setCurrentOrder(Order currentOrder) {
-		this.currentOrder = currentOrder;
-	}
 }

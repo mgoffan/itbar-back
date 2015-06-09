@@ -16,8 +16,7 @@ public class BarService {
 
 	public void loginBar(Form form, final BarLogInCallback cb) {
 
-		if (   Session.use().getCurrentUser() == null /* desaparece con el backoffice */
-				&& Session.use().getCurrentBar() == null
+		if (Session.use().getCurrentBar() == null
 				&& (form.hasBeenValidated() || form.isValid()) ) {
 
 			BarMiddleware.loginBar(form.get(FieldKeys.KEY_LEGAJO), form.get(FieldKeys.KEY_PASSWORD), new BarLogInCallback() {
@@ -34,8 +33,7 @@ public class BarService {
 			});
 		} else {
 
-			if (   Session.use().getCurrentUser() == null
-					&& Session.use().getCurrentBar() == null) {
+			if ( Session.use().getCurrentBar() == null) {
 				cb.error(new RemoteError(RemoteError.ALREADY_LOGGED_IN, "Ya inicio sesion"));
 			} else {
 				cb.error(new RemoteError(RemoteError.INVALID_FORM, "Formulario invalido"));
@@ -44,8 +42,7 @@ public class BarService {
 	}
 
 	public void getMenus(FindMultipleCallback<Category> cb) {
-		if (   Session.use().getCurrentUser() != null
-				|| Session.use().getCurrentBar() != null) {
+		if ( Session.use().getCurrentBar() != null) {
 
 			BarMiddleware.getMenus(cb);
 		} else {

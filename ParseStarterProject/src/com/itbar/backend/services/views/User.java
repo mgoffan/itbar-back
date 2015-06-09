@@ -1,8 +1,6 @@
 package com.itbar.backend.services.views;
 
 import com.itbar.backend.services.UserService;
-import com.itbar.backend.services.callbacks.FindMultipleCallback;
-import com.itbar.backend.util.Field;
 import com.itbar.backend.util.FieldKeys;
 import com.itbar.backend.util.Form;
 
