@@ -17,8 +17,6 @@ import com.itbar.backend.util.Form;
  *
  * Ver UserService
  *
- * @see UserService
- *
  * Created by martin on 5/23/15.
  */
 public class OrderService {

@@ -12,65 +12,16 @@ import com.itbar.backend.util.fields.TimeField;
 import com.itbar.backend.util.fields.Validator;
 
 /**
+ * <p>
  * El FormBuilder se utiliza para crear formularios predeterminados para las operaciones a lo largo
  * y ancho de la app. Garantiza que los formularios sean exactamente como se necesitan.
- * Se construyen en los activities y se leen en los Services
+ * Se construyen en los activities y se leen en los Services</p>
+ * <h4>Ejemplo De Uso:</h4>
+ * <code>Form form = FormBuilder.buildBarLoginForm()</code>
  * @see com.itbar.frontend.activities.EnterActivity
- * @see com.itbar.backend.services.UserService
  * Created by martin on 21/05/15.
  */
 public class FormBuilder {
-
-	/**
-	 * Construye el formulario para hacer el login de un usuario
-	 *
-	 * @return el formulario correspondiente al login de un usario
-	 */
-	public static Form buildLoginForm() {
-		Form form = new Form();
-		form.addField(FieldKeys.KEY_LEGAJO, new LegajoField(true));
-		form.addField(FieldKeys.KEY_PASSWORD, new PasswordField(true));
-		return form;
-	}
-
-	/**
-	 * Construye un formulario para crear un usuario
-	 *
-	 * @return Form el formulario que corresponde a la creacion de un usuario
-	 */
-	public static Form buildUserForm() {
-		final Form form = new Form();
-		form.addField(FieldKeys.KEY_LEGAJO, new LegajoField(true));
-		form.addField(FieldKeys.KEY_EMAIL, new EmailField(true));
-		form.addField(FieldKeys.KEY_PHONE, new PhoneField());
-		form.addField(FieldKeys.KEY_NAME, new NameField(true));
-		form.addField(FieldKeys.KEY_SURNAME, new NameField(true));
-		form.addField(FieldKeys.KEY_ID, new TextField());
-		return form;
-	}
-
-	/**
-	 * Construye el formulario requerido para registrar a un usuario
-	 *
-	 * @return Form el formulario que se necesita para registrar a un usuario
-	 */
-	public static Form buildSignupForm() {
-		final Form form = new Form();
-		form.addField(FieldKeys.KEY_LEGAJO, new LegajoField(true));
-		form.addField(FieldKeys.KEY_EMAIL, new EmailField(true));
-		form.addField(FieldKeys.KEY_PHONE, new PhoneField());
-		form.addField(FieldKeys.KEY_NAME, new NameField());
-		form.addField(FieldKeys.KEY_SURNAME, new NameField());
-		form.addField(FieldKeys.KEY_PASSWORD, new PasswordField(true));
-		form.addField(FieldKeys.KEY_REPEAT_PASSWORD, new PasswordField(true));
-		form.setInterFieldValidation(new InterFieldValidation() {
-			@Override
-			public Boolean validateForm() {
-				return form.get(FieldKeys.KEY_PASSWORD).equalsIgnoreCase(form.get(FieldKeys.KEY_REPEAT_PASSWORD));
-			}
-		});
-		return form;
-	}
 
 	/**
 	 * Construye el formulario para hacer el login de un Bar
