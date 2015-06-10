@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
  */
 public interface Formats {
 
-	Pattern EMAIL = Pattern.compile("[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\\.[a-zA-Z]{2,4}");
+	Pattern EMAIL = Pattern.compile("^[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\\.[a-zA-Z]{2,4}$");
 
 	Pattern PHONE = Pattern.compile(".*");
 
 	Pattern KEY_ID = Pattern.compile(".*");
 
-	Pattern LEGAJO = Pattern.compile("[1-9][0-9]{4}");
+	Pattern LEGAJO = Pattern.compile("^[1-9][0-9]{4}$");
 
 	Pattern CUIT = Pattern.compile("\\d+");
 

@@ -43,5 +43,7 @@ public class ProductActivity extends Activity {
 
 		// Sale de cuando haces getMenus y cada categoria tiene los productos ahi adentro
 
+		
+
 	}
 }
