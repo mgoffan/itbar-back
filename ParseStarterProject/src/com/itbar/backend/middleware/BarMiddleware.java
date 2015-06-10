@@ -7,8 +7,11 @@ import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.callbacks.BarLogInCallback;
 import com.itbar.backend.services.callbacks.FindMultipleCallback;
 import com.itbar.backend.services.callbacks.RUDCallback;
+import com.itbar.backend.services.callbacks.SaveCategoryCallback;
+import com.itbar.backend.services.callbacks.SaveMenuItemCallback;
 import com.itbar.backend.services.views.Category;
 import com.itbar.backend.services.views.MenuItem;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -81,9 +84,9 @@ public class BarMiddleware {
 
 	}
 
-	public static void addCategory(Category category, final RUDCallback cb) {
+	public static void addCategory(Category category, final SaveCategoryCallback cb) {
 
-		ParseObject object = CategoryTranslator.fromCategory(category);
+		final ParseObject object = CategoryTranslator.fromCategory(category);
 
 		object.saveInBackground(new SaveCallback() {
 			@Override
@@ -91,7 +94,7 @@ public class BarMiddleware {
 				if (e != null) {
 					cb.error(new RemoteError(e));
 				} else {
-					cb.success();
+					cb.success(CategoryTranslator.toCategory(object));
 				}
 			}
 		});
@@ -100,14 +103,16 @@ public class BarMiddleware {
 
 	public static void removeCategory(Category category, final RUDCallback cb) {
 
-		ParseObject object = CategoryTranslator.fromCategory(category);
+//		ParseObject object = CategoryTranslator.fromCategory(category);
 
-		if (object.getObjectId() == null) {
-			cb.error(new RemoteError(104, "Falta OID"));
-			return;
-		}
+//		if (category.getObjectId() == null) {
+//			cb.error(new RemoteError(104, "Falta OID"));
+//			return;
+//		}
 
-		object.saveInBackground(new SaveCallback() {
+		ParseObject object = ParseObject.createWithoutData("MenuCategories", category.getObjectId());
+
+		object.deleteInBackground(new DeleteCallback() {
 			@Override
 			public void done(ParseException e) {
 				if (e != null) {
@@ -120,13 +125,13 @@ public class BarMiddleware {
 
 	}
 
-	public static void updateCategory(Category category, final RUDCallback cb) {
+	public static void updateCategory(Category category, final SaveCategoryCallback cb) {
 		addCategory(category, cb);
 	}
 
-	public static void addMenuItem(MenuItem item, final RUDCallback cb) {
+	public static void addMenuItem(MenuItem item, final SaveMenuItemCallback cb) {
 
-		ParseObject object = MenuItemTranslator.fromMenuItem(item);
+		final ParseObject object = MenuItemTranslator.fromMenuItem(item);
 
 		object.saveInBackground(new SaveCallback() {
 			@Override
@@ -134,7 +139,7 @@ public class BarMiddleware {
 				if (e != null) {
 					cb.error(new RemoteError(e));
 				} else {
-					cb.success();
+					cb.success(MenuItemTranslator.toMenuItem(object));
 				}
 			}
 		});
@@ -142,14 +147,16 @@ public class BarMiddleware {
 
 	public static void removeMenuItem(MenuItem item, final RUDCallback cb) {
 
-		ParseObject object = MenuItemTranslator.fromMenuItem(item);
+//		ParseObject object = MenuItemTranslator.fromMenuItem(item);
+//
+//		if (object.getObjectId() == null) {
+//			cb.error(new RemoteError(104, "Falta OID"));
+//			return;
+//		}
 
-		if (object.getObjectId() == null) {
-			cb.error(new RemoteError(104, "Falta OID"));
-			return;
-		}
+		ParseObject object = ParseObject.createWithoutData("MenuItem", item.getObjectId());
 
-		object.saveInBackground(new SaveCallback() {
+		object.deleteInBackground(new DeleteCallback() {
 			@Override
 			public void done(ParseException e) {
 				if (e != null) {
@@ -160,6 +167,10 @@ public class BarMiddleware {
 			}
 		});
 
+	}
+
+	public static void updateMenuItem(MenuItem item, SaveMenuItemCallback cb) {
+		addMenuItem(item, cb);
 	}
 
 

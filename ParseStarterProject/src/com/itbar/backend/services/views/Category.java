@@ -15,6 +15,10 @@ public class Category implements Serializable{
 
 	private List<MenuItem> items = new ArrayList<>();
 
+	public Category() {
+
+	}
+
 	public Category(String name) {
 		this.name = name;
 	}

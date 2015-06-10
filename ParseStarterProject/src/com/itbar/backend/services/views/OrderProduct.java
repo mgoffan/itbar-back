@@ -1,75 +1,79 @@
 package com.itbar.backend.services.views;
 
-import com.itbar.backend.util.Form;
+import java.io.Serializable;
 
 /**
- * Created by ioninielavitzky on 5/28/15.
+ * Clase read-only que corresponde a un producto en una orden, esto significa que tiene la info del
+ * producto agregado a un comentario y una cantidad
+ *
+ * Created by martin on 5/23/15.
  */
-public class OrderProduct {
+public class OrderProduct{
 
-    private Order order;
-    private MenuItem menuItem;
-    private String comment = "";
-    private int quantity = 0;
+	private String objectId;
+	private MenuItem menuItem;
+	private Integer quantity;
+	private String comment;
 
-    public OrderProduct(){
+	public OrderProduct() {
 
-    }
+	}
 
-    public OrderProduct(MenuItem mI, String c, int q){
-        menuItem = mI;
-        comment = c;
-        quantity = q;
+	public OrderProduct(MenuItem menuItem, String comment, Integer quantity) {
+		this.menuItem = menuItem;
+		this.comment = comment;
+		this.quantity = quantity;
+	}
 
-    }
+	public OrderProduct(MenuItem menuItem) {
+		this.menuItem = menuItem;
+	}
 
-    public OrderProduct(MenuItem mI){
-        menuItem = mI;
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
 
-    }
+	public MenuItem getMenuItem() {
+		return menuItem;
+	}
 
-    public Order getOrder() {
-        return order;
-    }
+	public void setMenuItem(MenuItem menuItem) {
+		this.menuItem = menuItem;
+	}
 
-    public MenuItem getMenuItem() {
-        return menuItem;
-    }
+	public Integer getQuantity() {
+		return quantity;
+	}
 
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+	public String getComment() {
+		return comment;
+	}
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
-    public String getComment() {
-        return comment;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
-    public int getQuantity() {
-        return quantity;
-    }
+		OrderProduct orderProduct = (OrderProduct) o;
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+		return !(objectId != null ? !objectId.equals(orderProduct.objectId) : orderProduct.objectId != null);
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null)
-            return false;
+	}
 
-        if (o.getClass() != this.getClass())
-            return false;
-        if (((OrderProduct)o).getMenuItem().equals(this.getMenuItem()))
-            return true;
-        else
-            return false;
-    }
+	@Override
+	public int hashCode() {
+		return objectId != null ? objectId.hashCode() : 0;
+	}
+
+	public String getObjectId() {
+		return objectId;
+	}
 }

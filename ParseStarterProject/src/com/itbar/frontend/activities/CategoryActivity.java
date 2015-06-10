@@ -57,7 +57,6 @@ public class CategoryActivity extends Activity {
 
 					for (MenuItem menuItem : category.getItems()) {
 
-
 					}
 
 				}

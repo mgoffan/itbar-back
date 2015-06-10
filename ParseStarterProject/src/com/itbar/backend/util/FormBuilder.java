@@ -97,9 +97,9 @@ public class FormBuilder {
 	public static Form buildMenuItemForm() {
 		Form form = new Form();
 		form.addField(FieldKeys.KEY_NAME, new NameField(true));
-		form.addField(FieldKeys.KEY_DESCRIPTION, new NameField());
-		form.addField(FieldKeys.KEY_PRICE, (new NumberField(true)).setHasFloatingPoint(true));
-		form.addField(FieldKeys.KEY_ID, new LegajoField());
+		form.addField(FieldKeys.KEY_DESCRIPTION, new TextField());
+		form.addField(FieldKeys.KEY_PRICE, (new NumberField<Double>(true)).setHasFloatingPoint(true));
+		form.addField(FieldKeys.KEY_ID, new TextField());
 		return form;
 	}
 
@@ -139,7 +139,7 @@ public class FormBuilder {
 				return "Estado incorrecto";
 			}
 		}));
-		form.addField(FieldKeys.KEY_TOTAL, (new NumberField(true)).setHasFloatingPoint(true));
+		form.addField(FieldKeys.KEY_TOTAL, (new NumberField<Double>(true)).setHasFloatingPoint(true));
 		return form;
 	}
 
@@ -163,7 +163,7 @@ public class FormBuilder {
 	 * @return Form el formulario para buscar pedidos por estado en el servidor
 	 * @see Formats
 	 */
-	public static Form buildGetOrderForm() {
+	public static Form buildGetOrdersForm() {
 		Form form = new Form();
 		form.addField(FieldKeys.KEY_STATUS, new TextField(false, new Validator() {
 			@Override

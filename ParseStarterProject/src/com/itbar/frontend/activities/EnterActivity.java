@@ -18,12 +18,13 @@ import android.widget.Toast;
 import com.itbar.R;
 import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.ServiceRepository;
+import com.itbar.backend.services.callbacks.BarLogInCallback;
 import com.itbar.backend.services.callbacks.UserLogInCallback;
+import com.itbar.backend.services.views.Bar;
 import com.itbar.backend.services.views.User;
 import com.itbar.backend.util.FieldKeys;
 import com.itbar.backend.util.Form;
 import com.itbar.backend.util.FormBuilder;
-import com.itbar.frontend.Models.ScreenMessages;
 import com.parse.ParseAnalytics;
 //import com.parse.starter.R;
 
@@ -66,16 +67,16 @@ public class EnterActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				Form loginForm = FormBuilder.buildLoginForm();
+				Form loginForm = FormBuilder.buildBarLoginForm();
 
 				loginForm.set(FieldKeys.KEY_CUIT, usuario.getText().toString());
 				loginForm.set(FieldKeys.KEY_PASSWORD, contra.getText().toString());
 
 
 				if (loginForm.isValid()) {
-					ServiceRepository.getInstance().getUserService().loginUser(loginForm, new UserLogInCallback() {
+					ServiceRepository.getInstance().getBarService().loginBar(loginForm, new BarLogInCallback() {
 						@Override
-						public void success(User user) {
+						public void success(Bar user) {
 							if (user != null) {
 								Intent intent = new Intent(EnterActivity.this, MainActivity.class);
 								startActivity(intent);

@@ -1,4 +1,4 @@
-package com.itbar.frontend.Models;
+package com.itbar.frontend.activities;
 
 public interface ScreenMessages {
 

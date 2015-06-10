@@ -7,12 +7,9 @@ import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.callbacks.FindMultipleCallback;
 import com.itbar.backend.services.callbacks.RUDCallback;
 import com.itbar.backend.services.callbacks.SaveOrderCallback;
-import com.itbar.backend.services.views.MenuItem;
 import com.itbar.backend.services.views.Order;
-import com.itbar.backend.services.views.OrderMenuItem;
 import com.itbar.backend.services.views.OrderProduct;
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -118,7 +115,7 @@ public class OrderMiddleware {
 
 	}
 
-	public static void getProductsForOrder(String orderId, final FindMultipleCallback<OrderMenuItem> cb) {
+	public static void getProductsForOrder(String orderId, final FindMultipleCallback<OrderProduct> cb) {
 
 		ParseQuery<ParseObject> query = new ParseQuery<>("OrderProduct");
 
@@ -133,10 +130,10 @@ public class OrderMiddleware {
 					cb.error(new RemoteError(e));
 				} else {
 
-					List<OrderMenuItem> menuItemList = new ArrayList<>();
+					List<OrderProduct> menuItemList = new ArrayList<>();
 
 					for (ParseObject obj : list) {
-						menuItemList.add(MenuItemTranslator.toOrderMenuItem(obj));
+						menuItemList.add(MenuItemTranslator.toOrderProduct(obj));
 					}
 
 					cb.success(menuItemList);
