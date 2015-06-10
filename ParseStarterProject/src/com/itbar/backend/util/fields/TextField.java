@@ -43,6 +43,9 @@ public class TextField extends Field {
 
 	@Override
 	public String getErrorDescription() {
+		if (this.customValidator != null && !this.isValid()) {
+			return this.customValidator.errorDescription();
+		}
 		return "";
 	}
 

@@ -5,4 +5,5 @@ package com.itbar.backend.util.fields;
  */
 public interface Validator {
 	Boolean isValid(String val);
+	String errorDescription();
 }

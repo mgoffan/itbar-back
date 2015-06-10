@@ -1,6 +1,7 @@
 package com.itbar.backend.middleware.translators;
 
 import com.itbar.backend.services.views.MenuItem;
+import com.itbar.backend.services.views.OrderMenuItem;
 import com.parse.ParseObject;
 
 /**
@@ -33,4 +34,20 @@ public class MenuItemTranslator {
 
 		return obj;
 	}
+
+	public static OrderMenuItem toOrderMenuItem(ParseObject menuItem) {
+
+		OrderMenuItem item = new OrderMenuItem();
+
+		item.setComment(menuItem.getString("comment"));
+		item.setObjectId(menuItem.getObjectId());
+		item.setQuantity((Integer)menuItem.getNumber("quantity"));
+
+		item.setMenuItem(toMenuItem(menuItem.getParseObject("item")));
+
+		return item;
+
+	}
+
+
 }

@@ -1,12 +1,15 @@
 package com.itbar.backend.middleware;
 
+import com.itbar.backend.middleware.translators.MenuItemTranslator;
 import com.itbar.backend.middleware.translators.OrderProductTranslator;
 import com.itbar.backend.middleware.translators.OrderTranslator;
 import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.callbacks.FindMultipleCallback;
 import com.itbar.backend.services.callbacks.RUDCallback;
 import com.itbar.backend.services.callbacks.SaveOrderCallback;
+import com.itbar.backend.services.views.MenuItem;
 import com.itbar.backend.services.views.Order;
+import com.itbar.backend.services.views.OrderMenuItem;
 import com.itbar.backend.services.views.OrderProduct;
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -108,6 +111,35 @@ public class OrderMiddleware {
 
 					cb.success(orders);
 
+
+				}
+			}
+		});
+
+	}
+
+	public static void getProductsForOrder(String orderId, final FindMultipleCallback<OrderMenuItem> cb) {
+
+		ParseQuery<ParseObject> query = new ParseQuery<>("OrderProduct");
+
+		query.whereEqualTo("order", ParseObject.createWithoutData("Order", orderId));
+
+		query.include("item");
+
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> list, ParseException e) {
+				if (e != null) {
+					cb.error(new RemoteError(e));
+				} else {
+
+					List<OrderMenuItem> menuItemList = new ArrayList<>();
+
+					for (ParseObject obj : list) {
+						menuItemList.add(MenuItemTranslator.toOrderMenuItem(obj));
+					}
+
+					cb.success(menuItemList);
 
 				}
 			}

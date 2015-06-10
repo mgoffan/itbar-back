@@ -22,10 +22,7 @@ import com.itbar.backend.util.Form;
 public class OrderService {
 
 
-	/* con el form se pueden aplicar filtros */
-
-
-	public static void getOrders(Form form, FindMultipleCallback cb) {
+	public void getOrders(Form form, FindMultipleCallback cb) {
 
 		if (form.hasBeenValidated() || form.isValid()) {
 
@@ -40,9 +37,16 @@ public class OrderService {
 
 	}
 
-	public static void updateItem(Form form) {
-		/** TODO: puede ser que tenga sentido hacer un removeItem y un addItem */
+	public void getProductsForOrder(Form form, FindMultipleCallback cb) {
+		if (form.hasBeenValidated() || form.isValid()) {
 
-
+			if (Session.use().getCurrentBar() != null) {
+				OrderMiddleware.getProductsForOrder(form.get(FieldKeys.KEY_ID), cb);
+			} else {
+				cb.error(new RemoteError(RemoteError.NOT_LOGGED_IN, "No ha iniciado sesion"));
+			}
+		} else {
+			cb.error(new RemoteError(RemoteError.INVALID_FORM, "Formulario invalido"));
+		}
 	}
 }

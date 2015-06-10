@@ -121,12 +121,22 @@ public class FormBuilder {
 			public Boolean isValid(String val) {
 				return Formats.PAYMENT_TYPE.matcher(val).matches();
 			}
+
+			@Override
+			public String errorDescription() {
+				return "Tipo de pago incorrecto";
+			}
 		}));
 		form.addField(FieldKeys.KEY_COMMENT, new TextField());
 		form.addField(FieldKeys.KEY_STATUS, new TextField(true, new Validator() {
 			@Override
 			public Boolean isValid(String val) {
 				return Formats.STATUS.matcher(val).matches();
+			}
+
+			@Override
+			public String errorDescription() {
+				return "Estado incorrecto";
 			}
 		}));
 		form.addField(FieldKeys.KEY_TOTAL, (new NumberField(true)).setHasFloatingPoint(true));
@@ -160,7 +170,18 @@ public class FormBuilder {
 			public Boolean isValid(String val) {
 				return Formats.STATUS.matcher(val).matches();
 			}
+
+			@Override
+			public String errorDescription() {
+				return "Estado incorrecto";
+			}
 		}));
+		return form;
+	}
+
+	public static Form buildProductForOrderForm() {
+		Form form = new Form();
+		form.addField(FieldKeys.KEY_ID, new TextField(true));
 		return form;
 	}
 }
