@@ -20,7 +20,7 @@
         <EditText
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:id="@+id/editText"
+            android:id="@+id/name"
             android:background="#ff393939"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/textView2"
@@ -35,25 +35,25 @@
             android:text="Precio"
             android:id="@+id/textView3"
             android:layout_marginTop="15dp"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/name"
             android:layout_toRightOf="@+id/textView2"
             android:layout_toEndOf="@+id/textView2" />
 
         <EditText
             android:layout_width="150dp"
             android:layout_height="30dp"
-            android:id="@+id/editText2"
+            android:id="@+id/price"
             android:background="#ff393939"
             android:layout_alignBottom="@+id/textView3"
-            android:layout_alignLeft="@+id/editText"
-            android:layout_alignStart="@+id/editText"
+            android:layout_alignLeft="@+id/name"
+            android:layout_alignStart="@+id/name"
             android:layout_marginLeft="69dp"
             android:layout_marginStart="69dp" />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="150dp"
-            android:id="@+id/editText3"
+            android:id="@+id/desc"
             android:background="#ff393939"
             android:layout_below="@+id/textView3"
             android:layout_alignParentLeft="true"
@@ -66,7 +66,7 @@
             android:text="Aceptar"
             android:id="@+id/ok"
             android:layout_marginTop="15dp"
-            android:layout_below="@+id/editText3"
+            android:layout_below="@+id/desc"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </RelativeLayout>

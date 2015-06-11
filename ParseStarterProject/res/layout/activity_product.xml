@@ -7,4 +7,9 @@
     tools:context="com.itbar.frontend.activities.ProductActivity"
     android:background="@drawable/bluewallpaper">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollProds"></LinearLayout>
 </RelativeLayout>

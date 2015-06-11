@@ -1,9 +1,12 @@
 package com.itbar.frontend.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.itbar.R;
 import com.itbar.backend.services.RemoteError;
@@ -58,12 +61,13 @@ public class OrderActivity extends Activity {
 			ServiceRepository.getInstance().getOrderService().getOrders(form, new FindMultipleCallback() {
 				@Override
 				public void success(List objects) {
+					LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 				}
 
 				@Override
 				public void error(RemoteError e) {
-
+					Toast.makeText(getApplicationContext(),ScreenMessages.ERROR,Toast.LENGTH_SHORT).show();
 				}
 			});
 		} else {

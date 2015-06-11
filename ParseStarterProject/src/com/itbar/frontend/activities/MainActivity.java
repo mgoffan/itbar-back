@@ -1,9 +1,12 @@
 package com.itbar.frontend.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.itbar.R;
 
@@ -13,6 +16,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        drawUI();
     }
 
     @Override
@@ -36,4 +40,34 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void drawUI(){
+        ImageButton category = (ImageButton) findViewById(R.id.catbtn);
+        ImageButton products = (ImageButton) findViewById(R.id.prodbtn);
+        ImageButton orders = (ImageButton) findViewById(R.id.pedidobtn);
+
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),CategoryActivity.class));
+            }
+        });
+
+        products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ProductActivity.class));
+            }
+        });
+
+        orders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),OrderActivity.class));
+            }
+        });
+
+    }
+
+
 }

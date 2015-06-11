@@ -73,6 +73,11 @@ public class EnterActivity extends Activity {
 				loginForm.set(FieldKeys.KEY_PASSWORD, contra.getText().toString());
 
 
+				/**
+				 *
+				 * OJO PORQUE ACA RECIBE UN CUIT PERO EN PARSE ESTA REGISTRADO BAJO eatbar NO POR CUIT
+				 *
+				 */
 				if (loginForm.isValid()) {
 					ServiceRepository.getInstance().getBarService().loginBar(loginForm, new BarLogInCallback() {
 						@Override
@@ -104,29 +109,4 @@ public class EnterActivity extends Activity {
 	}
 
 
-	public static class listOfProducts extends Activity {
-
-		@Override
-		protected void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			setContentView(R.layout.activity_list_of_products);
-		}
-
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.menu_list_of_products, menu);
-			return true;
-		}
-
-		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			// Handle action bar item clicks here. The action bar will
-			// automatically handle clicks on the Home/Up button, so long
-			// as you specify a parent activity in AndroidManifest.xml.
-			int id = item.getItemId();
-
-			return super.onOptionsItemSelected(item);
-		}
-	}
 }
