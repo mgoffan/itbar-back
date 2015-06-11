@@ -24,6 +24,22 @@ import com.itbar.backend.util.fields.Validator;
 public class FormBuilder {
 
 	/**
+	 * Construye un formulario para crear un usuario
+	 *
+	 * @return Form el formulario que corresponde a la creacion de un usuario
+	 */
+	public static Form buildUserForm() {
+		final Form form = new Form();
+		form.addField(FieldKeys.KEY_LEGAJO, new LegajoField(true));
+		form.addField(FieldKeys.KEY_EMAIL, new EmailField(true));
+		form.addField(FieldKeys.KEY_PHONE, new PhoneField());
+		form.addField(FieldKeys.KEY_NAME, new NameField(true));
+		form.addField(FieldKeys.KEY_SURNAME, new NameField(true));
+		form.addField(FieldKeys.KEY_ID, new TextField());
+		return form;
+	}
+
+	/**
 	 * Construye el formulario para hacer el login de un Bar
 	 *
 	 * @return Form un formulario para loggear a un Bar
@@ -38,7 +54,6 @@ public class FormBuilder {
 	/**
 	 * Formulario que contiene la informacion de un bar
 	 * @return Form
-	 * @deprecated
 	 */
 	public static Form buildBarForm() {
 		Form form = new Form();
@@ -46,6 +61,7 @@ public class FormBuilder {
 		form.addField(FieldKeys.KEY_EMAIL, new EmailField());
 		form.addField(FieldKeys.KEY_NAME, new NameField(true));
 		form.addField(FieldKeys.KEY_PHONE, new PhoneField());
+		form.addField(FieldKeys.KEY_ID, new TextField(true));
 		return form;
 	}
 

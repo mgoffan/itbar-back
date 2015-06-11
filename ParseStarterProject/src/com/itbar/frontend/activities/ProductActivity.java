@@ -59,16 +59,17 @@ public class ProductActivity extends Activity {
 
 		for (final com.itbar.backend.services.views.MenuItem item : category.getItems()){
 			View v = vi.inflate(R.layout.products_view, null);
-			ViewGroup insertPoint = (ViewGroup) findViewById(R.id.scrollProds);
-			insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-			TextView prodName = (TextView) findViewById(R.id.prodName);
-			TextView price = (TextView) findViewById(R.id.priceProd);
-			ImageButton ok = (ImageButton) findViewById(R.id.ok);
-			ImageButton no = (ImageButton) findViewById(R.id.no);
+			TextView prodName = (TextView) v.findViewById(R.id.prodName);
+			TextView price = (TextView) v.findViewById(R.id.priceProd);
+			ImageButton ok = (ImageButton) v.findViewById(R.id.ok);
+			ImageButton no = (ImageButton) v.findViewById(R.id.no);
 
 			prodName.setText( item.getName() );
 			price.setText("$"+item.getPrice());
+
+			ViewGroup insertPoint = (ViewGroup) findViewById(R.id.scrollProds);
+			insertPoint.addView(v);//new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
 
 			ok.setOnClickListener(new View.OnClickListener() {
 				@Override

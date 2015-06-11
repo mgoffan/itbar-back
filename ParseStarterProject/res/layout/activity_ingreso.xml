@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/usuariotxt"
             android:typeface="normal"
-            android:maxLength="5"
             android:hint="CUIT"
             android:layout_below="@+id/imagen"
             android:layout_alignParentLeft="true"

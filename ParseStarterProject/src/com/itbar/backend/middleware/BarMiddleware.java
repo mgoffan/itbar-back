@@ -1,5 +1,7 @@
 package com.itbar.backend.middleware;
 
+import android.util.Log;
+
 import com.itbar.backend.middleware.translators.BarTranslator;
 import com.itbar.backend.middleware.translators.CategoryTranslator;
 import com.itbar.backend.middleware.translators.MenuItemTranslator;

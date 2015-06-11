@@ -25,7 +25,16 @@ import com.itbar.backend.services.views.User;
 import com.itbar.backend.util.FieldKeys;
 import com.itbar.backend.util.Form;
 import com.itbar.backend.util.FormBuilder;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.List;
 //import com.parse.starter.R;
 
 
@@ -63,6 +72,9 @@ public class EnterActivity extends Activity {
 		back.setBackgroundResource(R.drawable.fondo_ppal_itbar);
 
 
+		usuario.setText("111111");
+		contra.setText("eatbar");
+
 		ingresar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -96,6 +108,9 @@ public class EnterActivity extends Activity {
 
 						@Override
 						public void error(RemoteError e) {
+							Log.v("APP123", e.getCode()+"");
+							Log.v("APP123", e.getMessage());
+							e.printStackTrace();
 							Toast.makeText(getApplicationContext(), ScreenMessages.ERROR, Toast.LENGTH_SHORT).show();
 						}
 					});

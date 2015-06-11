@@ -15,6 +15,8 @@ public class OrderProduct{
 	private Integer quantity;
 	private String comment;
 
+	private Order order;
+
 	public OrderProduct() {
 
 	}
@@ -55,6 +57,14 @@ public class OrderProduct{
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	@Override

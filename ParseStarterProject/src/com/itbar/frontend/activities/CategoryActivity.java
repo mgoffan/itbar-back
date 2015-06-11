@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +30,7 @@ public class CategoryActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_category);
 
-
+		drawUI();
 	}
 
 	@Override
@@ -59,15 +62,20 @@ public class CategoryActivity extends Activity {
 			public void success(List<Category> objects) {
 				// objects tiene el listado de categorias con sus productos adentro
 				LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 				for (final Category category : objects) {
+
 					View v = vi.inflate(R.layout.category_viewer, null);
-					ViewGroup insertPoint = (ViewGroup) findViewById(R.id.scrollCategory);
-					insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-					TextView cat = (TextView) findViewById(R.id.categoryView);
-					Button editButton = (Button) findViewById(R.id.deleteBtn);
-					Button prodButton = (Button) findViewById(R.id.prodBtn);
+					TextView cat = (TextView) v.findViewById(R.id.categoryView);
+					Button editButton = (Button) v.findViewById(R.id.deleteBtn);
+					Button prodButton = (Button) v.findViewById(R.id.prodBtn);
 
 					cat.setText( category.getName() );
+
+
+					LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollCategory);
+					insertPoint.addView(v);
+					//, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
 					editButton.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -80,7 +88,7 @@ public class CategoryActivity extends Activity {
 						@Override
 						public void onClick(View v) {
 							Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
-							intent.putExtra("category",category);
+							intent.putExtra("category", category);
 							startActivity(intent);
 						}
 					});
@@ -93,6 +101,9 @@ public class CategoryActivity extends Activity {
 			@Override
 			public void error(RemoteError e) {
 				// Toast con error aca
+				Log.v("APP123", e.getCode()+ "");
+				Log.v("APP123", e.getMessage());
+				e.printStackTrace();
 			}
 		});
 

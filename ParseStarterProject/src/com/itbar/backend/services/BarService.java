@@ -25,7 +25,7 @@ public class BarService {
 		if (Session.use().getCurrentBar() == null
 				&& (form.hasBeenValidated() || form.isValid()) ) {
 
-			BarMiddleware.loginBar(form.get(FieldKeys.KEY_LEGAJO), form.get(FieldKeys.KEY_PASSWORD), new BarLogInCallback() {
+			BarMiddleware.loginBar(form.get(FieldKeys.KEY_CUIT), form.get(FieldKeys.KEY_PASSWORD), new BarLogInCallback() {
 				@Override
 				public void success(Bar bar) {
 					Session.use().setCurrentBar(bar);

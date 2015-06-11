@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by martin on 5/23/15.
  */
-public class MenuItem {
+public class MenuItem implements Serializable {
 
 	private String objectId;
 	private String name;

@@ -1,5 +1,7 @@
 package com.itbar.backend.middleware.translators;
 
+import android.util.Log;
+
 import com.itbar.backend.services.views.Bar;
 import com.itbar.backend.services.views.User;
 import com.itbar.backend.util.Field;
@@ -14,12 +16,12 @@ import com.parse.ParseUser;
  */
 public class BarTranslator {
 
-	public static Bar toBar(ParseObject parseBar) {
+	public static Bar toBar(ParseUser parseBar) {
 
 		Form form = FormBuilder.buildBarForm();
 
-		form.set(FieldKeys.KEY_CUIT, parseBar.getString("cuit"));
-		form.set(FieldKeys.KEY_EMAIL, parseBar.getString("email"));
+		form.set(FieldKeys.KEY_CUIT, parseBar.getUsername());
+		form.set(FieldKeys.KEY_EMAIL, parseBar.getEmail());
 		form.set(FieldKeys.KEY_NAME, parseBar.getString("name"));
 		form.set(FieldKeys.KEY_PHONE, parseBar.getString("phone"));
 		form.set(FieldKeys.KEY_ID, parseBar.getObjectId());
