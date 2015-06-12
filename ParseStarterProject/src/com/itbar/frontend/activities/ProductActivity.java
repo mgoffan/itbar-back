@@ -78,10 +78,10 @@ public class ProductActivity extends Activity {
 					LayoutInflater inflater = getLayoutInflater();
 					View dialoglayout = inflater.inflate(R.layout.product_layout, null);
 
-					EditText name = (EditText) findViewById(R.id.name);
-					EditText price = (EditText) findViewById(R.id.price);
-					EditText desc = (EditText) findViewById(R.id.desc);
-					Button ok = (Button) findViewById(R.id.ok);
+					EditText name = (EditText) dialoglayout.findViewById(R.id.name);
+					EditText price = (EditText) dialoglayout.findViewById(R.id.price);
+					EditText desc = (EditText) dialoglayout.findViewById(R.id.desc);
+					Button ok = (Button) dialoglayout.findViewById(R.id.ok);
 
 					name.setText(item.getName());
 					price.setText("$"+item.getPrice());

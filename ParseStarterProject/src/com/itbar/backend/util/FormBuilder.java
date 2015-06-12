@@ -98,7 +98,7 @@ public class FormBuilder {
 	public static Form buildCategoryForm() {
 		Form form = new Form();
 		form.addField(FieldKeys.KEY_NAME, new NameField(true));
-		form.addField(FieldKeys.KEY_ID, new LegajoField());
+		form.addField(FieldKeys.KEY_ID, new TextField());
 		return form;
 	}
 

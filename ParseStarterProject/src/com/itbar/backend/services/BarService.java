@@ -88,7 +88,7 @@ public class BarService {
 
 				Category category = new Category();
 
-				category.setObjectId(form.get(FieldKeys.KEY_NAME));
+				category.setObjectId(form.get(FieldKeys.KEY_ID));
 
 				BarMiddleware.removeCategory(category, cb);
 

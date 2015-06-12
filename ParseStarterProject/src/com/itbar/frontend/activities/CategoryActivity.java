@@ -19,7 +19,11 @@ import com.itbar.R;
 import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.ServiceRepository;
 import com.itbar.backend.services.callbacks.FindMultipleCallback;
+import com.itbar.backend.services.callbacks.RUDCallback;
 import com.itbar.backend.services.views.Category;
+import com.itbar.backend.util.FieldKeys;
+import com.itbar.backend.util.Form;
+import com.itbar.backend.util.FormBuilder;
 
 import java.util.List;
 
@@ -81,6 +85,31 @@ public class CategoryActivity extends Activity {
 						@Override
 						public void onClick(View v) {
 							Toast.makeText(getApplicationContext(), "Hay que borrarlo", Toast.LENGTH_SHORT).show();
+
+							Form form = FormBuilder.buildCategoryForm();
+
+							form.set(FieldKeys.KEY_ID, category.getObjectId());
+							form.set(FieldKeys.KEY_NAME, category.getName());
+
+							if (form.isValid()) {
+
+								ServiceRepository.getInstance().getBarService().removeCategory(form, new RUDCallback() {
+									@Override
+									public void success() {
+										Toast.makeText(getApplicationContext(), "Yaay", Toast.LENGTH_LONG).show();
+										/** TODO: Eliminar la fila entera */
+									}
+
+									@Override
+									public void error(RemoteError e) {
+										Log.v("APP123", e.getCode() + "");
+										Log.v("APP123", e.getMessage());
+										e.printStackTrace();
+									}
+								});
+							} else {
+								Log.v("APP123", form.collectErrors().toString());
+							}
 						}
 					});
 

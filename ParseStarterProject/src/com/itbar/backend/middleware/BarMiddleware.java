@@ -103,7 +103,38 @@ public class BarMiddleware {
 
 	}
 
-	public static void removeCategory(Category category, final RUDCallback cb) {
+	private static void removeMenuItemsOfCategory(Category category, final RUDCallback cb) {
+
+		ParseQuery<ParseObject> query = new ParseQuery<>("MenuItem");
+
+		Log.v("APP123", category.getObjectId());
+
+		query.whereEqualTo("category", ParseObject.createWithoutData("MenuCategories",category.getObjectId()));
+
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> list, ParseException e) {
+				if (e != null) {
+					cb.error(new RemoteError(e));
+				} else {
+					ParseObject.deleteAllInBackground(list, new DeleteCallback() {
+						@Override
+						public void done(ParseException e) {
+							if (e != null) {
+								cb.error(new RemoteError(e));
+							} else {
+								cb.success();
+							}
+						}
+					});
+
+				}
+			}
+		});
+
+	}
+
+	public static void removeCategory(final Category category, final RUDCallback cb) {
 
 //		ParseObject object = CategoryTranslator.fromCategory(category);
 
@@ -120,7 +151,7 @@ public class BarMiddleware {
 				if (e != null) {
 					cb.error(new RemoteError(e));
 				} else {
-					cb.success();
+					removeMenuItemsOfCategory(category, cb);
 				}
 			}
 		});
