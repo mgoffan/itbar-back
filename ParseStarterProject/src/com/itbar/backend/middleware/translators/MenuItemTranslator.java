@@ -30,7 +30,7 @@ public class MenuItemTranslator {
 		obj.put("name", menuItem.getName());
 		obj.put("description", menuItem.getDescription());
 		obj.put("price", menuItem.getPrice());
-		obj.put("category", ParseObject.createWithoutData("Category", menuItem.getCategory().getObjectId()));
+		obj.put("category", ParseObject.createWithoutData("MenuCategories", menuItem.getCategory().getObjectId()));
 
 		return obj;
 	}

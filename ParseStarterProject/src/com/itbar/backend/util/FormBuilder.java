@@ -116,6 +116,7 @@ public class FormBuilder {
 		form.addField(FieldKeys.KEY_DESCRIPTION, new TextField());
 		form.addField(FieldKeys.KEY_PRICE, (new NumberField<Double>(true)).setHasFloatingPoint(true));
 		form.addField(FieldKeys.KEY_ID, new TextField());
+		form.addField(FieldKeys.KEY_CATEGORY, new TextField());
 		return form;
 	}
 

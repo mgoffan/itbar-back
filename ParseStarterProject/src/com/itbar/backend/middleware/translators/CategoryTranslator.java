@@ -1,6 +1,7 @@
 package com.itbar.backend.middleware.translators;
 
 import com.itbar.backend.services.views.Category;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 
 /**
@@ -10,7 +11,16 @@ public class CategoryTranslator {
 
 	public static Category toCategory(ParseObject category) {
 
-		Category cat = new Category(category.getString("name"), category.getObjectId());
+		Category cat;
+
+		try {
+			category = category.fetchIfNeeded();
+
+			cat = new Category(category.getString("name"), category.getObjectId());
+		} catch (ParseException ex) {
+
+			cat = new Category("", "");
+		}
 
 		return cat;
 	}

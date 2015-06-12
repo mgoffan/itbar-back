@@ -26,6 +26,8 @@ public class GlobalMiddleware {
 
 		ParseUser.enableAutomaticUser();
 		ParseACL defaultACL = new ParseACL();
+		defaultACL.setPublicWriteAccess(true);
+		defaultACL.setPublicReadAccess(true);
 		// Optionally enable public read access.
 		// defaultACL.setPublicReadAccess(true);
 		ParseACL.setDefaultACL(defaultACL, true);

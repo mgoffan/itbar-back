@@ -25,6 +25,8 @@ public interface Formats {
 	Pattern NUMBER_INT = Pattern.compile("^(\\+|-)?([0-9]|[1-9][0-9])+$");
 	Pattern NUMBER_DOUBLE = Pattern.compile("^(\\+|-)?([0-9]|[1-9][0-9])+\\.[0-9]+$");
 
+	Pattern NUMBER_TWO_DECIMAL = Pattern.compile("^(\\+|-)?(0|[1-9][0-9]*)((\\.|,)[0-9]{2})?$");
+
 	Pattern TIME24 = Pattern.compile("^([0-1][0-9]|2[0-3]):[0-5][0-9]$");
 	Pattern TIME12 = Pattern.compile("^(0[1-9]|1[0-2]):[0-5][0-9]] (AM|PM|am|pm)$");
 

@@ -177,6 +177,9 @@ public class BarService {
 				item.setDescription(form.get(FieldKeys.KEY_DESCRIPTION));
 				item.setPrice((Double) form.getField(FieldKeys.KEY_PRICE).retrieveResult());
 				item.setObjectId(form.get(FieldKeys.KEY_NAME));
+				Category category = new Category();
+				category.setObjectId(form.get(FieldKeys.KEY_CATEGORY));
+				item.setCategory(category);
 
 				BarMiddleware.updateMenuItem(item, cb);
 
