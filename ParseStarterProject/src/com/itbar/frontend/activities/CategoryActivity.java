@@ -121,7 +121,7 @@ public class CategoryActivity extends Activity {
 
 					View v = vi.inflate(R.layout.category_viewer, null);
 					TextView cat = (TextView) v.findViewById(R.id.categoryView);
-					Button editButton = (Button) v.findViewById(R.id.deleteBtn);
+					Button deleteBtn = (Button) v.findViewById(R.id.deleteBtn);
 					Button prodButton = (Button) v.findViewById(R.id.prodBtn);
 
 					cat.setText( category.getName() );
@@ -130,7 +130,7 @@ public class CategoryActivity extends Activity {
 					LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollCategory);
 					insertPoint.addView(v);
 
-					editButton.setOnClickListener(new View.OnClickListener() {
+					deleteBtn.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							Toast.makeText(getApplicationContext(), "Hay que borrarlo", Toast.LENGTH_SHORT).show();

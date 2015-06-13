@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.itbar.R;
 import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.ServiceRepository;
+import com.itbar.backend.services.callbacks.RUDCallback;
 import com.itbar.backend.services.callbacks.SaveMenuItemCallback;
 import com.itbar.backend.services.views.Category;
 import com.itbar.backend.util.Field;
@@ -53,20 +54,6 @@ public class ProductActivity extends Activity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void drawUI(final Category category) {
 
@@ -164,7 +151,27 @@ public class ProductActivity extends Activity {
             no.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Borrar de Parse! - O sea, cambiar el estado
+                    Form form = FormBuilder.buildMenuItemForm();
+
+                    form.set(FieldKeys.KEY_NAME,item.getName());
+                    form.set(FieldKeys.KEY_DESCRIPTION,item.getDescription());
+                    form.set(FieldKeys.KEY_PRICE,item.getPrice().toString());
+                    form.set(FieldKeys.KEY_ID,item.getObjectId());
+                    form.set(FieldKeys.KEY_CATEGORY,item.getCategory().toString());
+
+                    ServiceRepository.getInstance().getBarService().removeMenuItem(form, new RUDCallback() {
+                        @Override
+                        public void success() {
+                            Toast.makeText(getApplicationContext(),"Has eliminado el producto",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void error(RemoteError e) {
+                            Toast.makeText(getApplicationContext(),"No has eliminado el producto",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
                 }
             });
 
