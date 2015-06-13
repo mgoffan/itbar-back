@@ -27,11 +27,14 @@ public class CategoryTranslator {
 
 	public static ParseObject fromCategory(Category category) {
 
-		ParseObject obj = new ParseObject("MenuCategory");
+		ParseObject obj;
+
+		if (category.getObjectId() != null && !category.getObjectId().trim().equals(""))
+			obj = ParseObject.createWithoutData("MenuCategories", category.getObjectId());
+		else
+			obj = new ParseObject("MenuCategories");
 
 		obj.put("name", category.getName());
-		if (category.getObjectId() != null)
-			obj.put("objectId", category.getObjectId());
 
 		return obj;
 

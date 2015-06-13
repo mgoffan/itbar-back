@@ -108,7 +108,7 @@ public class BarService {
 
 			if (form.hasBeenValidated() || form.isValid()) {
 
-				Category category = new Category(form.get(FieldKeys.KEY_NAME), form.get(FieldKeys.KEY_ID));
+				Category category = new Category(form.get(FieldKeys.KEY_NAME));
 
 				BarMiddleware.updateCategory(category, cb);
 
@@ -132,6 +132,10 @@ public class BarService {
 				item.setName(form.get(FieldKeys.KEY_NAME));
 				item.setDescription(form.get(FieldKeys.KEY_DESCRIPTION));
 				item.setPrice((Double) form.getField(FieldKeys.KEY_PRICE).retrieveResult());
+
+				Category category = new Category();
+				category.setObjectId(form.get(FieldKeys.KEY_CATEGORY));
+				item.setCategory(category);
 
 				BarMiddleware.addMenuItem(item, cb);
 
@@ -176,7 +180,7 @@ public class BarService {
 				item.setName(form.get(FieldKeys.KEY_NAME));
 				item.setDescription(form.get(FieldKeys.KEY_DESCRIPTION));
 				item.setPrice((Double) form.getField(FieldKeys.KEY_PRICE).retrieveResult());
-				item.setObjectId(form.get(FieldKeys.KEY_NAME));
+				item.setObjectId(form.get(FieldKeys.KEY_ID));
 				Category category = new Category();
 				category.setObjectId(form.get(FieldKeys.KEY_CATEGORY));
 				item.setCategory(category);

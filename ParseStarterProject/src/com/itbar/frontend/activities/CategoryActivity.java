@@ -83,7 +83,6 @@ public class CategoryActivity extends Activity {
 					public void onClick(View v) {
 						Form form = FormBuilder.buildCategoryForm();
 						form.set(FieldKeys.KEY_NAME,nameCategory.getText().toString());
-						form.set(FieldKeys.KEY_ID, "12345");
 						Toast.makeText(getApplicationContext(),"MIRAR ESTA PARTE...",Toast.LENGTH_SHORT).show();
 
 						ServiceRepository.getInstance().getBarService().addCategory(form, new SaveCategoryCallback() {

@@ -1,5 +1,7 @@
 package com.itbar.backend.middleware.translators;
 
+import android.util.Log;
+
 import com.itbar.backend.services.views.MenuItem;
 import com.itbar.backend.services.views.OrderProduct;
 import com.parse.ParseObject;
@@ -25,7 +27,13 @@ public class MenuItemTranslator {
 
 	public static ParseObject fromMenuItem(MenuItem menuItem) {
 
-		ParseObject obj = new ParseObject("MenuItem");
+		ParseObject obj;
+
+		if (menuItem.getObjectId() != null && !menuItem.getObjectId().trim().equals("")) {
+			obj = ParseObject.createWithoutData("MenuItem", menuItem.getObjectId());
+		} else {
+			obj = new ParseObject("MenuItem");
+		}
 
 		obj.put("name", menuItem.getName());
 		obj.put("description", menuItem.getDescription());

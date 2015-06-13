@@ -23,7 +23,7 @@ public interface Formats {
 	Pattern NAME = Pattern.compile(".*");
 
 	Pattern NUMBER_INT = Pattern.compile("^(\\+|-)?([0-9]|[1-9][0-9])+$");
-	Pattern NUMBER_DOUBLE = Pattern.compile("^(\\+|-)?([0-9]|[1-9][0-9])+\\.[0-9]+$");
+	Pattern NUMBER_DOUBLE = Pattern.compile("^(\\+|-)?([0-9]|[1-9][0-9])+((\\.|,)[0-9]+)?$");
 
 	Pattern NUMBER_TWO_DECIMAL = Pattern.compile("^(\\+|-)?(0|[1-9][0-9]*)((\\.|,)[0-9]{2})?$");
 
