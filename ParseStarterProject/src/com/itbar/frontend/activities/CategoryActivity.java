@@ -1,6 +1,8 @@
 package com.itbar.frontend.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.ServiceRepository;
 import com.itbar.backend.services.callbacks.FindMultipleCallback;
 import com.itbar.backend.services.callbacks.RUDCallback;
+import com.itbar.backend.services.callbacks.SaveCategoryCallback;
 import com.itbar.backend.services.views.Category;
 import com.itbar.backend.util.FieldKeys;
 import com.itbar.backend.util.Form;
@@ -61,6 +66,51 @@ public class CategoryActivity extends Activity {
 
 	private void drawUI() {
 
+		ImageButton addCategory = (ImageButton) findViewById(R.id.addCategory);
+
+		addCategory.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				LayoutInflater inflater = getLayoutInflater();
+				View dialoglayout = inflater.inflate(R.layout.category_layout, null);
+
+				final EditText nameCategory = (EditText) dialoglayout.findViewById(R.id.name);
+				final Button okBtn = (Button) dialoglayout.findViewById(R.id.okBtn);
+
+				okBtn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Form form = FormBuilder.buildCategoryForm();
+						form.set(FieldKeys.KEY_NAME,nameCategory.getText().toString());
+						form.set(FieldKeys.KEY_ID, "12345");
+						Toast.makeText(getApplicationContext(),"MIRAR ESTA PARTE...",Toast.LENGTH_SHORT).show();
+
+						ServiceRepository.getInstance().getBarService().addCategory(form, new SaveCategoryCallback() {
+							@Override
+							public void success(Category category) {
+								Toast.makeText(getApplicationContext(),"Agregado",Toast.LENGTH_SHORT).show();
+							}
+
+							@Override
+							public void error(RemoteError error) {
+								Toast.makeText(getApplicationContext(),"OOPS",Toast.LENGTH_SHORT).show();
+							}
+						});
+
+					}
+				});
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(CategoryActivity.this);
+				builder.setView(dialoglayout);
+				builder.show();
+
+
+
+			}
+		});
+
+
 		ServiceRepository.getInstance().getBarService().getMenus(new FindMultipleCallback<Category>() {
 			@Override
 			public void success(List<Category> objects) {
@@ -79,7 +129,6 @@ public class CategoryActivity extends Activity {
 
 					LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollCategory);
 					insertPoint.addView(v);
-					//, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
 					editButton.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -121,8 +170,6 @@ public class CategoryActivity extends Activity {
 							startActivity(intent);
 						}
 					});
-
-
 
 				}
 			}

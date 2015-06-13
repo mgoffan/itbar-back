@@ -43,20 +43,12 @@ public class MainActivity extends Activity {
 
     public void drawUI(){
         ImageButton category = (ImageButton) findViewById(R.id.catbtn);
-        ImageButton products = (ImageButton) findViewById(R.id.prodbtn);
         ImageButton orders = (ImageButton) findViewById(R.id.pedidobtn);
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),CategoryActivity.class));
-            }
-        });
-
-        products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ProductActivity.class));
             }
         });
 
