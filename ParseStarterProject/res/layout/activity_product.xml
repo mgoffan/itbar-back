@@ -10,6 +10,25 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollProds"></LinearLayout>
+        android:layout_height="200dp"
+        android:id="@+id/scrollProds"
+        android:layout_above="@+id/relativeLayout2"
+        android:layout_alignParentTop="true"></LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/relativeLayout2">
+
+        <ImageButton
+            android:id="@+id/addProduct"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/check"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 </RelativeLayout>
