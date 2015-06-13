@@ -2,6 +2,7 @@ package com.itbar.frontend.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,6 +71,10 @@ public class OrderActivity extends Activity {
 		prods.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent intent =  new Intent(getApplicationContext(),ProductOrderActivity.class);
+				//Aca tuve que entrar a la clase Order y decirle que implemente Serializable!!!
+				intent.putExtra("orderID",order.getObjectId());
+				startActivity(intent);
 				//Tiene que abrir ProductOrderActivity pasandole en el intent a o
 				// Usar ServiceRepository.getInstance().getOrderService().getProductsForOrder();
 			}

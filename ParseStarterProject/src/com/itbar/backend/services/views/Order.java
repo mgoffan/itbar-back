@@ -1,12 +1,10 @@
 package com.itbar.backend.services.views;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by martin on 5/23/15.
- */
-public class Order {
+public class Order implements Serializable{
 
 	private List<OrderProduct> items = null;
 
@@ -16,7 +14,7 @@ public class Order {
 
 	private String horario = "";
 
-	private String paymentType = ""; //Crear clase?
+	private String paymentType = "";
 
 	private String status = null;
 

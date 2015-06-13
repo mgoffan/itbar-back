@@ -31,16 +31,5 @@
             android:layout_marginLeft="15dp"
             android:textColor="#ff000000" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:id="@+id/delete"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/prodName"
-            android:layout_toEndOf="@+id/prodName"
-            android:layout_marginLeft="140dp"
-            android:layout_marginStart="63dp" />
     </RelativeLayout>
 </RelativeLayout>
