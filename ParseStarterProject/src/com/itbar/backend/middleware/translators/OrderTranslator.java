@@ -30,6 +30,16 @@ public class OrderTranslator {
 		return obj;
 	}
 
+	public static ParseObject parseObjectByChangingStatusOnOrder(Order order) {
+
+		ParseObject obj = ParseObject.createWithoutData("Order", order.getObjectId());
+
+		obj.put(FieldKeys.KEY_STATUS, order.getStatus());
+
+		return obj;
+
+	}
+
 	public static Order toOrder(ParseObject obj) {
 
 		Order order = new Order();

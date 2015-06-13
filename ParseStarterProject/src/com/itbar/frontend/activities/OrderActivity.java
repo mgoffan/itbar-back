@@ -50,6 +50,10 @@ public class OrderActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void drawOrders() {
+
+	}
+
 	private void drawUI() {
 
 		Form form = FormBuilder.buildGetOrdersForm();

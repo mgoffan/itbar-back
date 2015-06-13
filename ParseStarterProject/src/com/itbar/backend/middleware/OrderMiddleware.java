@@ -59,9 +59,7 @@ public class OrderMiddleware {
 
 	public static void cancelOrder(final Order order, final RUDCallback cb) {
 
-		order.setStatus("Cancelada");
-
-		final ParseObject parseOrder = OrderTranslator.fromOrder(order);
+		final ParseObject parseOrder = OrderTranslator.parseObjectByChangingStatusOnOrder(order);
 
 		parseOrder.saveInBackground(new SaveCallback() {
 			@Override

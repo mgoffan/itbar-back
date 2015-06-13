@@ -64,6 +64,65 @@ public class CategoryActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void drawCategory(final Category category) {
+
+		LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		final View v = vi.inflate(R.layout.category_viewer, null);
+		TextView cat = (TextView) v.findViewById(R.id.categoryView);
+		Button deleteBtn = (Button) v.findViewById(R.id.deleteBtn);
+		Button prodButton = (Button) v.findViewById(R.id.prodBtn);
+
+		cat.setText( category.getName() );
+
+
+		final LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollCategory);
+		insertPoint.addView(v);
+
+		deleteBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				Toast.makeText(getApplicationContext(), "Hay que borrarlo", Toast.LENGTH_SHORT).show();
+
+				Form form = FormBuilder.buildCategoryForm();
+
+				form.set(FieldKeys.KEY_ID, category.getObjectId());
+				form.set(FieldKeys.KEY_NAME, category.getName());
+
+				if (form.isValid()) {
+
+					ServiceRepository.getInstance().getBarService().removeCategory(form, new RUDCallback() {
+						@Override
+						public void success() {
+							Toast.makeText(getApplicationContext(), "Yaay", Toast.LENGTH_LONG).show();
+							/** TODO: Eliminar la fila entera */
+							insertPoint.removeView(v);
+						}
+
+						@Override
+						public void error(RemoteError e) {
+							Log.v("APP123", e.getCode() + "");
+							Log.v("APP123", e.getMessage());
+							e.printStackTrace();
+						}
+					});
+				} else {
+					Log.v("APP123", form.collectErrors().toString());
+				}
+			}
+		});
+
+		prodButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+				intent.putExtra("category", category);
+				startActivity(intent);
+			}
+		});
+
+	}
+
 	private void drawUI() {
 
 		ImageButton addCategory = (ImageButton) findViewById(R.id.addCategory);
@@ -82,13 +141,13 @@ public class CategoryActivity extends Activity {
 					@Override
 					public void onClick(View v) {
 						Form form = FormBuilder.buildCategoryForm();
-						form.set(FieldKeys.KEY_NAME,nameCategory.getText().toString());
-						Toast.makeText(getApplicationContext(),"MIRAR ESTA PARTE...",Toast.LENGTH_SHORT).show();
+						form.set(FieldKeys.KEY_NAME, nameCategory.getText().toString());
 
 						ServiceRepository.getInstance().getBarService().addCategory(form, new SaveCategoryCallback() {
 							@Override
 							public void success(Category category) {
 								Toast.makeText(getApplicationContext(),"Agregado",Toast.LENGTH_SHORT).show();
+								drawCategory(category);
 							}
 
 							@Override
@@ -116,59 +175,9 @@ public class CategoryActivity extends Activity {
 				// objects tiene el listado de categorias con sus productos adentro
 				LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-				for (final Category category : objects) {
+				for (Category category : objects) {
 
-					View v = vi.inflate(R.layout.category_viewer, null);
-					TextView cat = (TextView) v.findViewById(R.id.categoryView);
-					Button deleteBtn = (Button) v.findViewById(R.id.deleteBtn);
-					Button prodButton = (Button) v.findViewById(R.id.prodBtn);
-
-					cat.setText( category.getName() );
-
-
-					LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollCategory);
-					insertPoint.addView(v);
-
-					deleteBtn.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Toast.makeText(getApplicationContext(), "Hay que borrarlo", Toast.LENGTH_SHORT).show();
-
-							Form form = FormBuilder.buildCategoryForm();
-
-							form.set(FieldKeys.KEY_ID, category.getObjectId());
-							form.set(FieldKeys.KEY_NAME, category.getName());
-
-							if (form.isValid()) {
-
-								ServiceRepository.getInstance().getBarService().removeCategory(form, new RUDCallback() {
-									@Override
-									public void success() {
-										Toast.makeText(getApplicationContext(), "Yaay", Toast.LENGTH_LONG).show();
-										/** TODO: Eliminar la fila entera */
-									}
-
-									@Override
-									public void error(RemoteError e) {
-										Log.v("APP123", e.getCode() + "");
-										Log.v("APP123", e.getMessage());
-										e.printStackTrace();
-									}
-								});
-							} else {
-								Log.v("APP123", form.collectErrors().toString());
-							}
-						}
-					});
-
-					prodButton.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
-							intent.putExtra("category", category);
-							startActivity(intent);
-						}
-					});
+					drawCategory(category);
 
 				}
 			}
