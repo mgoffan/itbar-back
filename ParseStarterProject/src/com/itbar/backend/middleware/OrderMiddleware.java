@@ -57,7 +57,13 @@ public class OrderMiddleware {
 
 	}
 
-	public static void cancelOrder(final Order order, final RUDCallback cb) {
+	public static void cancelOrder(Order order, RUDCallback cb) {
+
+		updateOrderStatus(order, cb);
+
+	}
+
+	public static void updateOrderStatus(final Order order, final RUDCallback cb) {
 
 		final ParseObject parseOrder = OrderTranslator.parseObjectByChangingStatusOnOrder(order);
 
@@ -75,6 +81,8 @@ public class OrderMiddleware {
 		});
 
 	}
+
+
 
 	public static void fetchAll(FindMultipleCallback cb) {
 		fetchWithStatus(null, cb);

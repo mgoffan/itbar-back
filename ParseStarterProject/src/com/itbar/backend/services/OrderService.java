@@ -69,4 +69,24 @@ public class OrderService {
 		}
 
 	}
+
+	public void orderHasBeenPrepared(Form form, RUDCallback cb) {
+
+		if (form.hasBeenValidated() || form.isValid()) {
+
+			if (Session.use().getCurrentBar() != null) {
+
+				Order order = new Order();
+
+				order.setStatus(form.get(FieldKeys.KEY_STATUS));
+
+				OrderMiddleware.updateOrderStatus(order, cb);
+			} else {
+				cb.error(new RemoteError(RemoteError.NOT_LOGGED_IN, "No ha iniciado sesion"));
+			}
+		} else {
+			cb.error(new RemoteError(RemoteError.INVALID_FORM, "Formulario invalido"));
+		}
+
+	}
 }

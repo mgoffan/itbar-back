@@ -3,6 +3,7 @@ package com.itbar.frontend.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import com.itbar.R;
 import com.itbar.backend.services.RemoteError;
 import com.itbar.backend.services.ServiceRepository;
 import com.itbar.backend.services.callbacks.FindMultipleCallback;
+import com.itbar.backend.services.callbacks.RUDCallback;
 import com.itbar.backend.services.views.Order;
 import com.itbar.backend.util.FieldKeys;
 import com.itbar.backend.util.Form;
@@ -54,8 +56,48 @@ public class OrderActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void drawOrders() {
+	private void drawOrder(final Order order) {
+		LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+		View v = vi.inflate(R.layout.order_layout, null);
+		TextView orderID = (TextView) v.findViewById(R.id.orderID);
+		TextView user = (TextView) v.findViewById(R.id.user);
+		TextView totalPrice = (TextView) v.findViewById(R.id.totalprice);
+
+		Button prods = (Button) v.findViewById(R.id.prodInOrderBtn);
+		Button ready = (Button) v.findViewById(R.id.readyBtn);
+
+		prods.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//Tiene que abrir ProductOrderActivity pasandole en el intent a o
+				// Usar ServiceRepository.getInstance().getOrderService().getProductsForOrder();
+			}
+		});
+
+		ready.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				Form form = FormBuilder.buildGetOrdersForm();
+
+				form.set(FieldKeys.KEY_STATUS, "Preparada");
+
+				ServiceRepository.getInstance().getOrderService().orderHasBeenPrepared(form, new RUDCallback() {
+					@Override
+					public void success() {
+						Toast.makeText(getApplicationContext(), "Listo", Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void error(RemoteError e) {
+						Log.v("APP123", e.getCode() + "");
+						Log.v("APP123", e.getMessage());
+						e.printStackTrace();
+					}
+				});
+			}
+		});
 	}
 
 	private void drawUI() {
@@ -66,45 +108,19 @@ public class OrderActivity extends Activity {
 
 		if (form.isValid()) {
 
-			ServiceRepository.getInstance().getOrderService().getOrders(form, new FindMultipleCallback() {
+			ServiceRepository.getInstance().getOrderService().getOrders(form, new FindMultipleCallback<Order>() {
 				@Override
-				public void success(List objects) {
-					LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				public void success(List<Order> objects) {
 
-					//OJO ACA!!! No se como es! Puse Order o : objects que es lo mas logico, y me pide pober un "Object"
-					for ( final Order o : objects ) {
-						View v = vi.inflate(R.layout.order_layout, null);
-						TextView orderID = (TextView) v.findViewById(R.id.orderID);
-						TextView user = (TextView) v.findViewById(R.id.user);
-						TextView totalPrice = (TextView) v.findViewById(R.id.totalprice);
+					for ( final Order order : objects ) {
 
-						Button prods = (Button) v.findViewById(R.id.prodInOrderBtn);
-						Button ready = (Button) v.findViewById(R.id.readyBtn);
-
-						prods.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								//Tiene que abrir ProductOrderActivity pasandole en el intent a o
-							}
-						});
-
-						ready.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								o.setStatus("Listo"); //O lo que fuera!
-							}
-						});
-
-
+						drawOrder(order);
 					}
-
-
-
 				}
 
 				@Override
 				public void error(RemoteError e) {
-					Toast.makeText(getApplicationContext(),ScreenMessages.ERROR,Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), ScreenMessages.ERROR, Toast.LENGTH_SHORT).show();
 				}
 			});
 		} else {
