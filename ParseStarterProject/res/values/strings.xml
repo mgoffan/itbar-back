@@ -27,4 +27,5 @@
     <string name="title_activity_category">CategoryActivity</string>
     <string name="title_activity_product">ProductActivity</string>
     <string name="title_activity_order">OrderActivity</string>
+    <string name="title_activity_product_order">ProductOrderActivity</string>
 </resources>

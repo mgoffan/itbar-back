@@ -79,6 +79,10 @@
             android:name=".frontend.activities.OrderActivity"
             android:label="@string/title_activity_order" >
         </activity>
+        <activity
+            android:name=".frontend.activities.ProductOrderActivity"
+            android:label="@string/title_activity_product_order" >
+        </activity>
     </application>
 
 </manifest>
