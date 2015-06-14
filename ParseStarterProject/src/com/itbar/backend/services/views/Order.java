@@ -8,19 +8,19 @@ public class Order implements Serializable{
 
 	private List<OrderProduct> items = null;
 
-	private User buyer = null;
+	private User buyer;
 
-	private String comment = "";
+	private String comment;
 
-	private String horario = "";
+	private String horario;
 
-	private String paymentType = "";
+	private String paymentType;
 
-	private String status = null;
+	private String status;
 
-	private double total = 0;
+	private double total;
 
-	private String objectId = "";
+	private String objectId;
 
 	public Order(){
 		items = new ArrayList<>();

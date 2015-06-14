@@ -32,7 +32,7 @@ public class OrderActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order);
 
-
+		drawUI();
 	}
 
 	@Override
@@ -64,6 +64,10 @@ public class OrderActivity extends Activity {
 		TextView orderID = (TextView) v.findViewById(R.id.orderID);
 		TextView user = (TextView) v.findViewById(R.id.user);
 		TextView totalPrice = (TextView) v.findViewById(R.id.totalprice);
+
+		orderID.setText(order.getObjectId());
+		user.setText(order.getBuyer().getName() + " " + order.getBuyer().getSurname() + " - " + order.getBuyer().getLegajo());
+		totalPrice.setText(String.format("$%.02f", order.getTotal()));
 
 		Button prods = (Button) v.findViewById(R.id.prodInOrderBtn);
 		Button ready = (Button) v.findViewById(R.id.readyBtn);
@@ -117,7 +121,9 @@ public class OrderActivity extends Activity {
 				@Override
 				public void success(List<Order> objects) {
 
-					for ( final Order order : objects ) {
+					Log.v("APP123", objects.size()+"");
+
+					for ( Order order : objects ) {
 
 						drawOrder(order);
 					}
@@ -130,6 +136,7 @@ public class OrderActivity extends Activity {
 			});
 		} else {
 			// No es valido que es raro
+			Toast.makeText(getApplicationContext(), form.collectErrors().toString(), Toast.LENGTH_SHORT).show();
 		}
 
 	}

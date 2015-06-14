@@ -48,14 +48,14 @@ public class MainActivity extends Activity {
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CategoryActivity.class));
+                startActivity(new Intent(getApplicationContext(), CategoryActivity.class));
             }
         });
 
         orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),OrderActivity.class));
+                startActivity(new Intent(getApplicationContext(), OrderActivity.class));
             }
         });
 

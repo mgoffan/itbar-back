@@ -92,7 +92,7 @@ public class OrderMiddleware {
 
 		ParseQuery<ParseObject> query = new ParseQuery<>("Order");
 
-		query.include("buyer");
+		query.include("buyer").orderByAscending("createdAt").addAscendingOrder("horario");
 
 		if (status != null)
 			query.whereEqualTo("status", status);
