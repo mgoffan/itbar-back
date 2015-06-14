@@ -1,11 +1,19 @@
 package com.itbar.backend.middleware;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseCrashReporting;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.List;
 
 /**
  * Created by martin on 5/23/15.
@@ -25,7 +33,7 @@ public class GlobalMiddleware {
 
 
 		ParseUser.enableAutomaticUser();
-		ParseACL defaultACL = new ParseACL();
+		final ParseACL defaultACL = new ParseACL();
 		defaultACL.setPublicWriteAccess(true);
 		defaultACL.setPublicReadAccess(true);
 		// Optionally enable public read access.

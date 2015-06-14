@@ -1,5 +1,7 @@
 package com.itbar.backend.middleware.translators;
 
+import android.util.Log;
+
 import com.itbar.backend.services.views.MenuItem;
 import com.itbar.backend.services.views.Order;
 import com.itbar.backend.util.FieldKeys;
@@ -17,7 +19,7 @@ public class OrderTranslator {
 
 		ParseObject obj = new ParseObject("Order");
 
-		obj.put(FieldKeys.KEY_BUYER, ParseObject.createWithoutData("User", order.getBuyer().getObjectId()));
+		obj.put(FieldKeys.KEY_BUYER, ParseObject.createWithoutData("_User", order.getBuyer().getObjectId()));
 		obj.put(FieldKeys.KEY_COMMENT, order.getComment());
 		obj.put(FieldKeys.KEY_HORARIO, order.getHorario());
 		obj.put(FieldKeys.KEY_PAYMENT_TYPE, order.getPaymentType());
@@ -45,7 +47,7 @@ public class OrderTranslator {
 		Order order = new Order();
 
 		order.setStatus(obj.getString(FieldKeys.KEY_STATUS));
-		order.setBuyer(UserTranslator.toUser(UserTranslator.fromParseObject(obj)));
+		order.setBuyer(UserTranslator.toUser(UserTranslator.fromParseObject(obj.getParseObject("buyer"))));
 		order.setComment(obj.getString(FieldKeys.KEY_COMMENT));
 		order.setHorario(obj.getString(FieldKeys.KEY_HORARIO));
 //		order.setItems();

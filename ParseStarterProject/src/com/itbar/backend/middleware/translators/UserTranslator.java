@@ -74,12 +74,19 @@ public class UserTranslator {
 		ParseUser parseUser = new ParseUser();
 
 		parseUser.setUsername(obj.getString("username"));
-		parseUser.setObjectId(obj.getObjectId());
 		parseUser.setEmail(obj.getString("email"));
 		parseUser.put(FieldKeys.KEY_PHONE, obj.getString(FieldKeys.KEY_PHONE));
 		parseUser.put(FieldKeys.KEY_NAME, obj.getString(FieldKeys.KEY_NAME));
 		parseUser.put(FieldKeys.KEY_SURNAME, obj.getString(FieldKeys.KEY_SURNAME));
 		parseUser.put(FieldKeys.KEY_TYPE, "user");
+
+		if (!obj.isDataAvailable()) {
+			parseUser.setObjectId(obj.getObjectId());
+		}
+
+
+
+
 
 		return parseUser;
 
