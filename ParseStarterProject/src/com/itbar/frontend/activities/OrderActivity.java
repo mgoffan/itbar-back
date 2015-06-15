@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +73,9 @@ public class OrderActivity extends Activity {
 		Button prods = (Button) v.findViewById(R.id.prodInOrderBtn);
 		Button ready = (Button) v.findViewById(R.id.readyBtn);
 
+		final LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollOrder);
+		insertPoint.addView(v);
+
 		prods.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -86,15 +90,17 @@ public class OrderActivity extends Activity {
 
 		ready.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(final View v) {
 
-				Form form = FormBuilder.buildGetOrdersForm();
+				Form form = FormBuilder.buildOrderStatusChangeForm();
 
+				form.set(FieldKeys.KEY_ID, order.getObjectId());
 				form.set(FieldKeys.KEY_STATUS, "Preparada");
 
 				ServiceRepository.getInstance().getOrderService().orderHasBeenPrepared(form, new RUDCallback() {
 					@Override
 					public void success() {
+						insertPoint.removeView(v);
 						Toast.makeText(getApplicationContext(), "Listo", Toast.LENGTH_SHORT).show();
 					}
 

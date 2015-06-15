@@ -78,6 +78,7 @@ public class OrderService {
 
 				Order order = new Order();
 
+				order.setObjectId(form.get(FieldKeys.KEY_ID));
 				order.setStatus(form.get(FieldKeys.KEY_STATUS));
 
 				OrderMiddleware.updateOrderStatus(order, cb);

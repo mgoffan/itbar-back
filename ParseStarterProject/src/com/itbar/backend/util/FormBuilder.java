@@ -174,6 +174,30 @@ public class FormBuilder {
 	}
 
 	/**
+	 * Construye un formulario para cancelar un pedido por identificador
+	 *
+	 * @return Form el formulario para cancelar un pedido
+	 * @see com.itbar.backend.services.OrderService
+	 */
+
+	public static Form buildOrderStatusChangeForm() {
+		Form form = new Form();
+		form.addField(FieldKeys.KEY_ID, new TextField(true));
+		form.addField(FieldKeys.KEY_STATUS, new TextField(true, new Validator() {
+			@Override
+			public Boolean isValid(String val) {
+				return Formats.STATUS.matcher(val).matches();
+			}
+
+			@Override
+			public String errorDescription() {
+				return "Estado incorrecto";
+			}
+		}));
+		return form;
+	}
+
+	/**
 	 * Construye un formulario para realizar busquedas de pedidos por estado
 	 * No exige que el estado sea un campo requerido, en tal caso traera todos los pedidos.
 	 *

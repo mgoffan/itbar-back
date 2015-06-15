@@ -49,9 +49,11 @@ public class MenuItemTranslator {
 
 		product.setComment(orderProduct.getString("comment"));
 		product.setObjectId(orderProduct.getObjectId());
-		product.setQuantity((Integer)orderProduct.getNumber("quantity"));
+		product.setQuantity((Integer) orderProduct.getNumber("quantity"));
 
-		product.setMenuItem(toMenuItem(orderProduct.getParseObject("item")));
+		// Por si se elimino el producto
+		if (orderProduct.getParseObject("item") != null)
+			product.setMenuItem(toMenuItem(orderProduct.getParseObject("item")));
 
 		return product;
 

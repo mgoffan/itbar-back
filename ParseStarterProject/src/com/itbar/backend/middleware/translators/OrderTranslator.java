@@ -53,7 +53,7 @@ public class OrderTranslator {
 //		order.setItems();
 		order.setObjectId(obj.getObjectId());
 		order.setPaymentType(obj.getString(FieldKeys.KEY_PAYMENT_TYPE));
-		order.setTotal((Double) obj.getNumber(FieldKeys.KEY_TOTAL));
+		order.setTotal( obj.getNumber(FieldKeys.KEY_TOTAL).doubleValue());
 
 		return order;
 

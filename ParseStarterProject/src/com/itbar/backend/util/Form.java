@@ -102,8 +102,10 @@ public class Form {
 	 * @param val el valor que se le desea asignar
 	 */
 	public void set(String key, String val) {
-		this.fields.get(key).setValue(val);
-		resetState();
+		if (getField(key) != null) {
+			this.fields.get(key).setValue(val);
+			resetState();
+		}
 	}
 
 	/**

@@ -26,63 +26,66 @@ import java.util.List;
 
 public class ProductOrderActivity extends Activity {
 
-    private String order;
+	private String order;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_order);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_product_order);
 
-        this.order = (String) this.getIntent().getSerializableExtra("orderID");
+		this.order = (String) this.getIntent().getSerializableExtra("orderID");
 
-        drawUI();
-    }
+		drawUI();
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_product_order, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_product_order, menu);
+		return true;
+	}
 
-    public void drawUI(){
+	public void drawUI() {
 
-        Form form = FormBuilder.buildProductForOrderForm();
-        form.set(FieldKeys.KEY_ID, order);
+		Form form = FormBuilder.buildProductForOrderForm();
+		form.set(FieldKeys.KEY_ID, order);
 
-        ServiceRepository.getInstance().getOrderService().getProductsForOrder(form, new FindMultipleCallback<OrderProduct>() {
-            @Override
-            public void success(List<OrderProduct> objects) {
-                LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		ServiceRepository.getInstance().getOrderService().getProductsForOrder(form, new FindMultipleCallback<OrderProduct>() {
+			@Override
+			public void success(List<OrderProduct> objects) {
+				LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-                for (OrderProduct prod : objects){
-                    drawProd(prod);
-                }
+				for (OrderProduct prod : objects) {
+					drawProd(prod);
+				}
 
-            }
+			}
 
-            @Override
-            public void error(RemoteError e) {
-                Toast.makeText(getApplicationContext(),"OOPS",Toast.LENGTH_SHORT).show();
-            }
-        });
+			@Override
+			public void error(RemoteError e) {
+				Toast.makeText(getApplicationContext(), "OOPS", Toast.LENGTH_SHORT).show();
+			}
+		});
 
-    }
+	}
 
-    public void drawProd(OrderProduct order){
-        LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	public void drawProd(OrderProduct order) {
+		LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        final View v = vi.inflate(R.layout.product_order_layout, null);
+		final View v = vi.inflate(R.layout.product_order_layout, null);
 
-        TextView nameProd = (TextView) v.findViewById(R.id.prodName);
+		TextView nameProd = (TextView) v.findViewById(R.id.prodName);
 
-        nameProd.setText(order.getMenuItem().getName());
+		if (order.getMenuItem() != null)
+			nameProd.setText(order.getMenuItem().getName());
+		else
+			nameProd.setText("Producto Eliminado");
 
-        final LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollOrderProducrt);
-        insertPoint.addView(v);
+		final LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollOrderProducrt);
+		insertPoint.addView(v);
 
 
-    }
+	}
 
 
 }

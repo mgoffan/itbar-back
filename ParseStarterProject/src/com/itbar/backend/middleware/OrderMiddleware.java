@@ -73,9 +73,7 @@ public class OrderMiddleware {
 				if (e != null) {
 					cb.error(new RemoteError(e));
 				} else {
-
 					cb.success();
-
 				}
 			}
 		});
@@ -92,7 +90,7 @@ public class OrderMiddleware {
 
 		ParseQuery<ParseObject> query = new ParseQuery<>("Order");
 
-		query.include("buyer").orderByAscending("createdAt").addAscendingOrder("horario");
+		query.include("buyer").orderByDescending("createdAt").addDescendingOrder("horario");
 
 		if (status != null)
 			query.whereEqualTo("status", status);
