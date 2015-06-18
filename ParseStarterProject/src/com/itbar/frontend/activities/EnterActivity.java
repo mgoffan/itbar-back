@@ -84,12 +84,6 @@ public class EnterActivity extends Activity {
 				loginForm.set(FieldKeys.KEY_CUIT, usuario.getText().toString());
 				loginForm.set(FieldKeys.KEY_PASSWORD, contra.getText().toString());
 
-
-				/**
-				 *
-				 * OJO PORQUE ACA RECIBE UN CUIT PERO EN PARSE ESTA REGISTRADO BAJO eatbar NO POR CUIT
-				 *
-				 */
 				if (loginForm.isValid()) {
 					ServiceRepository.getInstance().getBarService().loginBar(loginForm, new BarLogInCallback() {
 						@Override
@@ -108,14 +102,11 @@ public class EnterActivity extends Activity {
 
 						@Override
 						public void error(RemoteError e) {
-							Log.v("APP123", e.getCode()+"");
-							Log.v("APP123", e.getMessage());
-							e.printStackTrace();
 							Toast.makeText(getApplicationContext(), ScreenMessages.ERROR, Toast.LENGTH_SHORT).show();
 						}
 					});
 				} else {
-					Log.v("APP123", loginForm.collectErrors().toString());
+					Toast.makeText(getApplicationContext(),loginForm.collectErrors().toString(),Toast.LENGTH_SHORT).show();
 				}
 
 			}

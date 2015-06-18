@@ -82,8 +82,6 @@ public class CategoryActivity extends Activity {
 		deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				Toast.makeText(getApplicationContext(), "Hay que borrarlo", Toast.LENGTH_SHORT).show();
-
 				Form form = FormBuilder.buildCategoryForm();
 
 				form.set(FieldKeys.KEY_ID, category.getObjectId());
@@ -94,20 +92,19 @@ public class CategoryActivity extends Activity {
 					ServiceRepository.getInstance().getBarService().removeCategory(form, new RUDCallback() {
 						@Override
 						public void success() {
-							Toast.makeText(getApplicationContext(), "Yaay", Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), ScreenMessages.OK, Toast.LENGTH_LONG).show();
 							/** TODO: Eliminar la fila entera */
 							insertPoint.removeView(v);
 						}
 
 						@Override
 						public void error(RemoteError e) {
-							Log.v("APP123", e.getCode() + "");
-							Log.v("APP123", e.getMessage());
+							Toast.makeText(CategoryActivity.this,ScreenMessages.OOPS,Toast.LENGTH_SHORT).show();
 							e.printStackTrace();
 						}
 					});
 				} else {
-					Log.v("APP123", form.collectErrors().toString());
+					Toast.makeText(CategoryActivity.this,form.collectErrors().toString(),Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -146,13 +143,13 @@ public class CategoryActivity extends Activity {
 						ServiceRepository.getInstance().getBarService().addCategory(form, new SaveCategoryCallback() {
 							@Override
 							public void success(Category category) {
-								Toast.makeText(getApplicationContext(),"Agregado",Toast.LENGTH_SHORT).show();
+								Toast.makeText(getApplicationContext(),ScreenMessages.ADDED,Toast.LENGTH_SHORT).show();
 								drawCategory(category);
 							}
 
 							@Override
 							public void error(RemoteError error) {
-								Toast.makeText(getApplicationContext(),"OOPS",Toast.LENGTH_SHORT).show();
+								Toast.makeText(getApplicationContext(),ScreenMessages.OOPS,Toast.LENGTH_SHORT).show();
 							}
 						});
 
@@ -185,9 +182,7 @@ public class CategoryActivity extends Activity {
 			@Override
 			public void error(RemoteError e) {
 				// Toast con error aca
-				Log.v("APP123", e.getCode()+ "");
-				Log.v("APP123", e.getMessage());
-				e.printStackTrace();
+				Toast.makeText(getApplicationContext(),ScreenMessages.OOPS,Toast.LENGTH_SHORT).show();
 			}
 		});
 

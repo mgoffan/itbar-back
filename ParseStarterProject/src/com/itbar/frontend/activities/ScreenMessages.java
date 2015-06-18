@@ -2,6 +2,12 @@ package com.itbar.frontend.activities;
 
 public interface ScreenMessages {
 
+    String OK = "Listo!";
+
+    String OOPS = "Hemos encontrado un problema! Revisa tus movimientos anteriores";
+    String ADDED =  "Agregado";
+    String SENT = "Enviada";
+    String DELETED_PROD = "Producto Eliminado";
     String NO_USER_VALID = "Usuario no valido";
     String NO_PASS_VALID = "La contrasena no es correcta";
     String USER_ALREADY_EXIST = "El usuario que intenta registrar ya existe";

@@ -107,8 +107,6 @@ public class BarMiddleware {
 
 		ParseQuery<ParseObject> query = new ParseQuery<>("MenuItem");
 
-		Log.v("APP123", category.getObjectId());
-
 		query.whereEqualTo("category", ParseObject.createWithoutData("MenuCategories",category.getObjectId()));
 
 		query.findInBackground(new FindCallback<ParseObject>() {

@@ -80,11 +80,9 @@ public class OrderActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent =  new Intent(getApplicationContext(),ProductOrderActivity.class);
-				//Aca tuve que entrar a la clase Order y decirle que implemente Serializable!!!
 				intent.putExtra("orderID",order.getObjectId());
 				startActivity(intent);
-				//Tiene que abrir ProductOrderActivity pasandole en el intent a o
-				// Usar ServiceRepository.getInstance().getOrderService().getProductsForOrder();
+
 			}
 		});
 
@@ -106,9 +104,7 @@ public class OrderActivity extends Activity {
 
 					@Override
 					public void error(RemoteError e) {
-						Log.v("APP123", e.getCode() + "");
-						Log.v("APP123", e.getMessage());
-						e.printStackTrace();
+						Toast.makeText(getApplicationContext(),ScreenMessages.OOPS,Toast.LENGTH_SHORT).show();
 					}
 				});
 			}
@@ -119,15 +115,13 @@ public class OrderActivity extends Activity {
 
 		Form form = FormBuilder.buildGetOrdersForm();
 
-		form.set(FieldKeys.KEY_STATUS, "Enviada");
+		form.set(FieldKeys.KEY_STATUS, ScreenMessages.SENT);
 
 		if (form.isValid()) {
 
 			ServiceRepository.getInstance().getOrderService().getOrders(form, new FindMultipleCallback<Order>() {
 				@Override
 				public void success(List<Order> objects) {
-
-					Log.v("APP123", objects.size()+"");
 
 					for ( Order order : objects ) {
 
@@ -141,7 +135,6 @@ public class OrderActivity extends Activity {
 				}
 			});
 		} else {
-			// No es valido que es raro
 			Toast.makeText(getApplicationContext(), form.collectErrors().toString(), Toast.LENGTH_SHORT).show();
 		}
 

@@ -63,7 +63,7 @@ public class ProductOrderActivity extends Activity {
 
 			@Override
 			public void error(RemoteError e) {
-				Toast.makeText(getApplicationContext(), "OOPS", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), ScreenMessages.OOPS, Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -79,7 +79,7 @@ public class ProductOrderActivity extends Activity {
 		if (order.getMenuItem() != null)
 			nameProd.setText(order.getMenuItem().getName());
 		else
-			nameProd.setText("Producto Eliminado");
+			nameProd.setText(ScreenMessages.DELETED_PROD);
 
 		final LinearLayout insertPoint = (LinearLayout) findViewById(R.id.scrollOrderProducrt);
 		insertPoint.addView(v);

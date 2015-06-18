@@ -3,6 +3,7 @@ package com.itbar.frontend.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -122,24 +123,28 @@ public class ProductActivity extends Activity {
 						form.set(FieldKeys.KEY_NAME, name.getText().toString());
 						form.set(FieldKeys.KEY_PRICE, price.getText().toString());
 						form.set(FieldKeys.KEY_DESCRIPTION, desc.getText().toString());
-						Log.v("APP123", item.getObjectId());
 						form.set(FieldKeys.KEY_ID, item.getObjectId());
 						form.set(FieldKeys.KEY_CATEGORY, category.getObjectId());
 
-						ServiceRepository.getInstance().getBarService().updateMenuItem(form, new SaveMenuItemCallback() {
-							@Override
-							public void success(com.itbar.backend.services.views.MenuItem menuItem) {
-								Log.v("APP123", menuItem.getName());
-								Toast.makeText(getApplicationContext(), "Yaay", Toast.LENGTH_SHORT).show();
-							}
+						if (form.isValid()) {
 
-							@Override
-							public void error(RemoteError error) {
-								Log.v("APP123", error.getCode() + "");
-								Log.v("APP123", error.getMessage());
-								error.printStackTrace();
-							}
-						});
+							ServiceRepository.getInstance().getBarService().updateMenuItem(form, new SaveMenuItemCallback() {
+								@Override
+								public void success(com.itbar.backend.services.views.MenuItem menuItem) {
+
+									Toast.makeText(getApplicationContext(), ScreenMessages.OK, Toast.LENGTH_SHORT).show();
+									startActivity(new Intent(ProductActivity.this, MainActivity.class));
+								}
+
+								@Override
+								public void error(RemoteError error) {
+									Toast.makeText(getApplicationContext(), ScreenMessages.OOPS, Toast.LENGTH_SHORT).show();
+								}
+							});
+
+						} else {
+							Toast.makeText(getApplicationContext(), form.collectErrors().toString(), Toast.LENGTH_SHORT).show();
+						}
 					}
 				});
 
@@ -165,13 +170,13 @@ public class ProductActivity extends Activity {
 				ServiceRepository.getInstance().getBarService().removeMenuItem(form, new RUDCallback() {
 					@Override
 					public void success() {
-						Toast.makeText(getApplicationContext(), "Has eliminado el producto", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), ScreenMessages.PRODUCT_DELETED, Toast.LENGTH_SHORT).show();
 						insertPoint.removeView(v);
 					}
 
 					@Override
 					public void error(RemoteError e) {
-						Toast.makeText(getApplicationContext(), "No has eliminado el producto", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), ScreenMessages.OOPS, Toast.LENGTH_SHORT).show();
 					}
 				});
 
@@ -268,20 +273,17 @@ public class ProductActivity extends Activity {
 							ServiceRepository.getInstance().getBarService().addMenuItem(form, new SaveMenuItemCallback() {
 								@Override
 								public void success(com.itbar.backend.services.views.MenuItem menuItem) {
-									Log.v("APP123", menuItem.getName());
-									Toast.makeText(getApplicationContext(), "Yaay", Toast.LENGTH_SHORT).show();
+									Toast.makeText(getApplicationContext(), ScreenMessages.OK, Toast.LENGTH_SHORT).show();
 									drawMenuItem(menuItem);
 								}
 
 								@Override
 								public void error(RemoteError error) {
-									Log.v("APP123", error.getCode() + "");
-									Log.v("APP123", error.getMessage());
-									error.printStackTrace();
+									Toast.makeText(getApplicationContext(), ScreenMessages.OOPS, Toast.LENGTH_SHORT).show();
 								}
 							});
 						} else {
-							Log.v("APP123", form.collectErrors().toString());
+							Toast.makeText(getApplicationContext(), form.collectErrors().toString(), Toast.LENGTH_SHORT).show();
 						}
 
 					}
